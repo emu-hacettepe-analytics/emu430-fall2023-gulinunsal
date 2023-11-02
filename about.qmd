@@ -6,6 +6,7 @@ sidebar: false
 # Education
 
 -   B.S., Industrial Engineering, Hacettepe University, Turkey, 2019 - ongoing.
+-   B.S., Economics, University of Lodz, Poland, 2021 - 2022.
 
 # Work Experience
 
@@ -21,7 +22,7 @@ sidebar: false
 
 # Competencies
 
-R, Quarto, Git, Python
+R, Quarto, Git, Python, Arena, Python, Solidworks, Matlab, Microsoft Office Programs, SQL, Minitab
 
 # Hobbies
 
