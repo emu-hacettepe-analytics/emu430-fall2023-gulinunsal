@@ -79,11 +79,11 @@ To use the library
 
 ·        To install package in **Python**
 
-*pip install \"library name\"*
+*pip install "library name"*
 
 To use the library
 
-*Import \"library name\"*
+*Import "library name"*
 
 # (c)
 
