@@ -2,14 +2,109 @@
 title: "Assignment 1"
 ---
 
-# Assignment 1
+# 
 
-```{r}
-1 + 1
+```         
 ```
 
-My first assignment has two parts.
+My first assignment has three parts.
 
-## (a)
+## (a)***Yes, you can use Python with RStudio Team!***
 
-## (b)
+***Gagandeep Singh & Xu Fei***
+
+Speakers at the conference are Solution Engineers in RStudio. Reasons to talk at this conference: "Can you use Python with RStudio teams?" answering the question. They offer a talk and solution for multilingual data scientists who want to use Python with RStudio or R users who works with python scientists and wants to collaborate with them.
+
+The reason for producing this solution is to allow two teams who know different languages and use similar workflows to work collaboratively. In the example model in the video, they wanted to focus on the problem that one part of the same workflow contains different languages and the other part contains different languages. For this, they build a model in Python all within RStudio.
+
+RStudio offers three professional tools: Workbench, RStudio Connect, Package Manager. First of all, Workbench provides a workspace for Python scientists to write code in RStudio. RStudio Connect provides the opportunity to share content as the project develops. Allows to deploy a very wide variety of data, data science assets. In Package Manager, you can install packages from here instead of PyPi.
+
+In the rest of the video, they showed the information explained through a demo, showing that Python can be used with Rstudio and that teams using different languages can work together.
+
+## (b) **3** ***Difference between R and Python***
+
+**1)     Indexing:**
+
+·        In Python indexing starts with 0
+
+```         
+list_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+
+```         
+  print(list_numbers[2])
+```
+
+```         
+output is 3
+```
+
+·        In R indexing starts with 1
+
+*list_numbers \<- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)*
+
+*list_numbers\[2\]*
+
+*output is 2*
+
+**2)     Function Definitions:**
+
+·        In **Python** a function defined by def
+
+*def sum(a,b):\
+    return a + b\
+\
+print(sum(a,b))*
+
+·        In **R** a function defined by function()
+
+```         
+sum <- function(x, y) { 
+
+  result <- x - y  
+
+  print(result) 
+}
+```
+
+***3)*** **Packages and Libraries:**
+
+·        To install package in **R**
+
+ *install.packages()*
+
+To use the library
+
+ *library()*
+
+·        To install package in **Python**
+
+*pip install \"library name\"*
+
+To use the library
+
+*Import \"library name\"*
+
+# (c)
+
+library(dslabs)
+
+data(na_example)
+
+head(na_example)
+
+total \<- sum(is.na(na_example))
+
+total
+
+na_example\[is.na(na_example)\] \<- 0
+
+na_example
+
+df \<- na_example
+
+df
+
+total \<- sum(is.na(df))
+
+# 
