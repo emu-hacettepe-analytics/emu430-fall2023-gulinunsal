@@ -83,7 +83,7 @@ To use the library
 
 To use the library
 
-*Import "library name"*
+*import "library name"*
 
 # (c)
 
