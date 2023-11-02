@@ -13,7 +13,7 @@ My first assignment has three parts.
 
 ***Gagandeep Singh & Xu Fei***
 
-Speakers at the conference are Solution Engineers in RStudio. Reasons to talk at this conference: "Can you use Python with RStudio teams?" answering the question. They offer a talk and solution for multilingual data scientists who want to use Python with RStudio or R users who works with python scientists and wants to collaborate with them.
+Speakers at the conference are Solution Engineers in RStudio. Reasons to talk at this conference: "Can you use Python with RStudio teams?" answering the question. They offer a talk and solution for multilingual data scientists who want to use Python with RStudio or R users who works with Python scientists and wants to collaborate with them.
 
 The reason for producing this solution is to allow two teams who know different languages and use similar workflows to work collaboratively. In the example model in the video, they wanted to focus on the problem that one part of the same workflow contains different languages and the other part contains different languages. For this, they build a model in Python all within RStudio.
 
