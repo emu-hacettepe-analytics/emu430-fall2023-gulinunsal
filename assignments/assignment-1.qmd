@@ -28,15 +28,17 @@ In the rest of the video, they showed the information explained through a demo, 
 ·        In Python indexing starts with 0
 
 ```         
+```
+
+```         
+```
+
+```         
+```
+
+```{r}
 list_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-```
-
-```         
   print(list_numbers[2])
-```
-
-```         
-output is 3
 ```
 
 ·        In R indexing starts with 1
