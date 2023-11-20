@@ -4,9 +4,6 @@ title: "Assignment 1"
 
 # 
 
-```         
-```
-
 My first assignment has three parts.
 
 ## (a)***Yes, you can use Python with RStudio Team!***
@@ -27,86 +24,109 @@ In the rest of the video, they showed the information explained through a demo, 
 
 ·        In Python indexing starts with 0
 
-```         
-```
-
-```         
-```
-
-```         
-```
-
-```{r}
+```{python}
 list_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-  print(list_numbers[2])
+print (list_numbers[2])
 ```
 
 ·        In R indexing starts with 1
 
-*list_numbers \<- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)*
+```{r}
+list_numbers <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
-*list_numbers\[2\]*
-
-*output is 2*
+list_numbers[2]
+```
 
 **2)     Function Definitions:**
 
 ·        In **Python** a function defined by def
 
-*def sum(a,b):\
-    return a + b\
-\
-print(sum(a,b))*
+```{python}
+# Define the function
+
+def sum(a,b):
+ return a + b
+ print(sum(a,b))
+ 
+# Print the sum
+
+sum(5,4)
+
+```
 
 ·        In **R** a function defined by function()
 
-```         
-sum <- function(x, y) { 
+```{r}
+#Define the function
+ext <- function(x, y) { 
 
   result <- x - y  
 
   print(result) 
 }
+
+# Print the sum
+
+ext(5,4)
 ```
 
-***3)*** **Packages and Libraries:**
+***3)*** **Loop:**
 
-·        To install package in **R**
+R use the **in** for loop.
 
- *install.packages()*
+```{r}
 
-To use the library
+for (i in 2:6) {
+  print(i)
+}
 
- *library()*
 
-·        To install package in **Python**
+```
 
-*pip install "library name"*
+Python use **for** for loop.
 
-To use the library
+```{python}
 
-*import "library name"*
+n = 4
+for i in range(0, n):
+    print(i)
+
+
+```
 
 # (c)
 
+```{r}
 library(dslabs)
 
 data(na_example)
 
-head(na_example)
+na_example
 
-total \<- sum(is.na(na_example))
 
-total
+```
 
-na_example\[is.na(na_example)\] \<- 0
+```{r}
+total_1 <- sum(is.na(na_example))
+
+total_1
+```
+
+```{r}
+na_example[is.na(na_example)] <- 0
 
 na_example
 
-df \<- na_example
+df <- na_example
 
 df
 
-total \<- sum(is.na(df))
+```
+
+```{r}
+total_2 <- sum(is.na(df))
+
+total_2
+```
 
 # 
