@@ -11,5 +11,4 @@ Below, you'll find a brief summary of our project. To access a detailed project 
 
 *Analyzing Preference Patterns: A Study on Industrial Engineering Programs in Ankara*
 
-This little represents a study examining preference patterns of Industrial Engineering programs in Ankara. The project aims to analyze the impact of these programs on student preferences, exploring trends in program preference an identifying potential influencing factors. Key focal points of the study may include preference rates, student motivation for program selection, notable features of the programs, and future expectations. The goal is to shed light on how Industrial Engineering programs in Ankara are perceived ans chosen by students.
-
+This brief summarizes a study looking at the preferences of Ankara's industrial engineering programs. The project's goal is to examine how these programs affect students' preferences by looking at program preference trends and locating possible contributing elements. Preference rates, student motivation for choosing a school, noteworthy program features, and future expectations could all be important study foci. The intention is to provide insight into how students see and select Ankara's industrial engineering degrees.
