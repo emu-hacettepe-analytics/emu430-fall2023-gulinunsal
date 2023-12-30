@@ -4,6 +4,211 @@ title: "Assignment 2"
 
 # Assignment 2
 
+## 1) Filtering Movies
+
 ```{r}
-1 + 1
+library(tidyverse)
+library(stringr)
+library(rvest)
+library(ggplot2)
+library(knitr)
+
+url_vector_1 <- "https://m.imdb.com/search/title/?title_type=feature&release_date=2010-01-01,2023-12-31&num_votes=2500,&country_of_origin=TR&count=250"
+url_vector_2 <- "https://m.imdb.com/search/title/?title_type=feature&release_date=,2009-12-31&num_votes=2500,&country_of_origin=TR&count=250"
+
 ```
+
+## 2) Creating Data Frame
+
+```{r}
+html_1 <- read_html(url_vector_1)
+html_2 <- read_html(url_vector_2)
+```
+
+```{r}
+#title
+title_names_1 <- html_1 |> html_nodes(".ipc-title__text")
+title_names_1 <- html_text(title_names_1)
+title_names_1 <- tail(head(title_names_1,-1),-1)
+title_names_1 <- str_split(title_names_1, " ", n=2)
+title_names_1 <- unlist(lapply(title_names_1, function(x) {x[2]}))
+
+title_names_2 <- html_2 |> html_nodes(".ipc-title__text")
+title_names_2 <- html_text(title_names_2)
+title_names_2 <- tail(head(title_names_2,-1),-1)
+title_names_2 <- str_split(title_names_2, " ", n=2)
+title_names_2 <- unlist(lapply(title_names_2, function(x) {x[2]}))
+
+title <- c(title_names_1, title_names_2)
+
+#year
+year_1 <- html_1 |> html_nodes(".sc-43986a27-8.jHYIIK.dli-title-metadata-item:nth-child(1)")
+year_1 <- html_text(year_1)
+year_1 <- as.numeric(year_1)
+
+year_2 <- html_2 |> html_nodes(".sc-43986a27-8.jHYIIK.dli-title-metadata-item:nth-child(1)")
+year_2 <- html_text(year_2)
+year_2 <- as.numeric(year_2)
+
+year <- c(year_1, year_2)
+
+# vote
+vote_1 <- html_1 |> html_nodes(".sc-53c98e73-0.kRnqtn")
+vote_1 <- html_text(vote_1)
+vote_1  <- as.numeric(gsub("\\D", "", vote_1 ))
+
+vote_2 <- html_2 |> html_nodes(".kRnqtn")
+vote_2 <- html_text(vote_2)
+vote_2  <- as.numeric(gsub("\\D", "", vote_2 ))
+
+vote <- c(vote_1, vote_2)
+
+#ratings
+rating_1 <- html_1 |> html_nodes(".ipc-rating-star.ipc-rating-star--base.ipc-rating-star--imdb.sc-9ab53865-1.iXEijC.ratingGroup--imdb-rating")
+rating_1 <- html_text(rating_1)
+rating_1  <- as.numeric(str_sub(rating_1, 1, 3))
+
+rating_2 <- html_2 |> html_nodes(".ipc-rating-star.ipc-rating-star--base.ipc-rating-star--imdb.sc-9ab53865-1.iXEijC.ratingGroup--imdb-rating")
+rating_2 <- html_text(rating_2)
+rating_2  <- as.numeric(str_sub(rating_2, 1, 3))
+
+rating <- c(rating_1, rating_2)
+
+#duration
+duration_1 <- html_1 |> html_nodes (".sc-43986a27-8.jHYIIK.dli-title-metadata-item:nth-child(2)")
+duration_1 <- html_text(duration_1)
+
+duration_2 <- html_2 |> html_nodes (".sc-43986a27-8.jHYIIK.dli-title-metadata-item:nth-child(2)")
+duration_2 <- html_text(duration_2)
+
+convert_time_to_minutes <- function(time_strings) {
+  total_minutes <- numeric(length(time_strings))
+  
+  for (i in seq_along(time_strings)) {
+    parts <- strsplit(time_strings[i], "h|m")[[1]]
+    hours <- as.numeric(parts[1])
+    minutes <- as.numeric(parts[2])
+    
+    total_minutes[i] <- hours * 60 + minutes
+  }
+  
+  return(total_minutes)
+}
+total_minutes_result_1 <- convert_time_to_minutes(duration_1)
+total_minutes_result_2 <- convert_time_to_minutes(duration_2)
+
+duration <- c(total_minutes_result_1, total_minutes_result_2)
+
+movies <- data.frame(title, year, duration, rating, vote)
+
+kable(rbind(movies), caption = "Movies")
+
+```
+
+## 3) Exploratory Data Analysis
+
+### a) Top and Bottom 5 Movies by Ranking
+
+```{r}
+
+movies <- data.frame(title, year, duration, rating, vote)
+
+movies <- arrange(movies, desc(rating))
+
+top_5_movies <- head(movies, 5)
+
+last_5_movies <- tail(movies, 5)
+
+kable(rbind(top_5_movies, last_5_movies), caption = "Best and Worst 5 Movies")
+
+```
+
+I watched the first 5 movies on the list. 4 of these are Yeşilçam films that have not lost their importance for years and are known to everyone, therefore they deserve the points they received, but at the same time, films that have a place in world cinema and can compete with these films should also be among these Yeşilçam films. In my opinion, there are other films that should be at least as high as the Yeşilçam films on this list.
+
+I can't comment because I haven't watched the last 5 movies.
+
+### b) My Favorite Movies
+
+```{r}
+fav_movies <- c("Ise Yarar Bir Sey", "Ölümlü Dünya 2", "Kurak Günler")
+
+fav_movies_data <- movies[movies$title %in% fav_movies, ]
+
+kable(rbind(fav_movies_data), caption = "My Favorite Movies")
+```
+
+### c) Visualization
+
+```{r}
+by_year <- movies %>%
+         group_by(year) %>%
+         summarise(avg_rating = mean(rating))
+
+ggplot(by_year, aes(x= year, y= avg_rating)) + geom_point()
+
+```
+
+As can be seen from the plot, average ratings decrease as the years increase.
+
+```{r}
+ggplot(movies, aes(x = year, y = rating, group = year)) + geom_boxplot()
+```
+
+### d)   Do you believe there is a relationship between the number of votes a movie received and its rating? Investigate the correlation between Votes and Ratings.
+
+```{r}
+cor(movies$vote, movies$rating)
+```
+
+### e)Do you believe there is a relationship between a movie\'s duration and its rating? Investigate the correlation between Duration and Ratings.
+
+```{r}
+cor(movies$duration, movies$rating)
+```
+
+## 4) Turkish Movies in the Top 1000 on IMDb
+
+```{r}
+url_vector_3 <- "https://m.imdb.com/search/title/?title_type=feature&groups=top_1000&country_of_origin=TR&count=250"
+
+
+html_3 <- read_html(url_vector_3)
+
+#title
+title_names_3 <- html_3 |> html_nodes(".ipc-title__text")
+title_names_3 <- html_text(title_names_3)
+title_names_3 <- tail(head(title_names_3,-1),-1)
+title_names_3 <- str_split(title_names_3, " ", n=2)
+title_names_3 <- unlist(lapply(title_names_3, function(x) {x[2]}))
+
+title <- title_names_3
+
+#year
+
+year_3 <- html_3 |> html_nodes(".sc-43986a27-8.jHYIIK.dli-title-metadata-item:nth-child(1)")
+year_3 <- html_text(year_3)
+year_3 <- as.numeric(year_3)
+
+year <- year_3
+
+top1000_df <- data.frame(title, year)
+
+kable(rbind(top1000_df), caption= "Turkish Movies in IMDB Top 1000")
+
+```
+
+```{r}
+
+final_df <- movies %>%
+  inner_join(top1000_df, by = c("title", "year"))
+
+kable(rbind(final_df), caption= "Turkish Movies in IMDB Top 1000")
+
+```
+
+```{r}
+final_df <- arrange(final_df, desc(rating))
+kable(rbind(final_df), caption= "Turkish Movies in IMDB Top 1000 by Ranked")
+```
+
+We see that this is not the same as the first dataframe. When I examined the first dataframe, only one of the first 11 movies was released after 2000. In this dataframe, only 2 dataframes were released before 2000. In other words, IMDb may consider the year parameter more than ratings in its rankings.
