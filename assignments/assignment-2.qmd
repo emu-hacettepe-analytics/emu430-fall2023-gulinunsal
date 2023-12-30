@@ -101,7 +101,6 @@ duration <- c(total_minutes_result_1, total_minutes_result_2)
 
 movies <- data.frame(title, year, duration, rating, vote)
 
-kable(rbind(movies), caption = "Movies")
 
 ```
 
